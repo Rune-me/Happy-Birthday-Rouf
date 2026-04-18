@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🎂</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{--bg:#05070d;--text:#f5f5f5;--soft:#cfcfcf}
+body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow:hidden}
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle at 30% 30%, #1a1a1a, transparent),
+radial-gradient(circle at 70% 70%, #111, transparent);
+animation:bgMove 18s linear infinite;
+z-index:-2;
+}
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle, transparent 60%, rgba(0,0,0,0.7));
+z-index:-1;
+}
+@keyframes bgMove{
+0%{transform:translate(0,0)}
+50%{transform:translate(-5%,-5%)}
+100%{transform:translate(0,0)}
+}
+
+.center{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+}
+
+.card{
+width:min(560px,92vw);
+background:rgba(20,20,20,.6);
+backdrop-filter:blur(14px);
+border-radius:24px;
+padding:28px;
+}
+
+h1{font-size:2.6rem;margin:0}
+.sub{opacity:.7;margin-top:10px}
+
+/* cake */
+.cake{width:240px;height:150px;position:relative;margin:20px auto}
+.layer{position:absolute;left:0;right:0;margin:auto;border-radius:16px}
+.bottom{bottom:0;width:240px;height:80px;background:#2a3556}
+.middle{bottom:60px;width:200px;height:60px;background:#32406b}
+.top{bottom:110px;width:160px;height:40px;background:#3b4a7c}
+.icing{position:absolute;width:170px;height:26px;bottom:130px;left:0;right:0;margin:auto;background:#c7d2fe;border-radius:20px}
+.candle{position:absolute;left:50%;transform:translateX(-50%);bottom:160px;width:10px;height:44px;background:#fff}
+.flame{
+position:absolute;
+top:-14px;
+left:50%;
+transform:translateX(-50%);
+width:10px;height:14px;
+background:orange;
+border-radius:50%;
+animation:flicker .2s infinite alternate;
+}
+@keyframes flicker{
+from{opacity:1}
+to{opacity:.6;transform:translateX(-50%) scale(1.2)}
+}
+
+button{
+margin-top:15px;
+padding:12px 18px;
+border:none;
+border-radius:999px;
+background:#444;
+color:white;
+cursor:pointer;
+}
+
+.fade-out{animation:fadeOut 1s forwards}
+@keyframes fadeOut{to{opacity:0;transform:scale(.98)}}
+
+/* page2 */
+#main{display:none}
+.big-text{
+font-size:4.2rem;
+font-weight:800;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+.big-text span{
+display:inline-block;
+opacity:0;
+transform:translateY(80px) scale(.4);
+animation:popIn 1s forwards;
+}
+@keyframes popIn{
+to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.subtext{
+position:absolute;
+bottom:40px;
+opacity:.8;
+}
+
+.heart{
+font-size:2.5rem;
+margin-top:20px;
+animation:heartbeat 1.4s infinite;
+}
+@keyframes heartbeat{
+0%{transform:scale(1)}
+25%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+/* page3 */
+#page3{display:none}
+.emotional{max-width:600px;font-size:1.4rem;line-height:1.8}
+
+/* page4 */
+#page4{display:none;overflow:hidden}
+.bg-photo{
+position:absolute;
+inset:0;
+background:url('img1.jpg') center/cover;
+filter:blur(20px) brightness(0.4);
+z-index: 0;
+}
+.train{
+position:absolute;
+bottom:20%;
+display:flex;
+gap:20px;
+animation:scrollTrain 50s linear infinite;
+z-index: 1;
+}
+.train img{
+width:180px;height:240px;
+object-fit:cover;
+border-radius:16px;
+}
+@keyframes scrollTrain{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+
+/* page5 */
+#page5{display:none}
+video{width:80%;border-radius:20px}
+
+/* page6 */
+#page6{display:none}
+.lock-box{
+background:rgba(30,30,30,.6);
+padding:30px;
+border-radius:20px;
+}
+.lock-input{
+padding:10px;
+font-size:1.2rem;
+border-radius:10px;
+border:none;
+text-align:center;
+}
+
+/* page7 */
+#page7{display:none}
+.letter{
+background:#c9a76c;
+color:#3b2a1a;
+padding:40px;
+max-width:600px;
+border-radius:10px;
+font-family:serif;
+line-height:1.8;
+}
+
+/* NAV */
+.nav-btn{
+position:absolute;
+bottom:30px;
+padding:10px 16px;
+border-radius:999px;
+background:#222;
+color:#fff;
+border:none;
+cursor:pointer;
+opacity:0.8;
+z-index: 10;
+}
+.prev-btn{left:30px}
+.next-btn-global{right:30px}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="intro" class="center">
+<div class="card">
+<h1>Make a Wish 🎂</h1>
+<h1>.</h1>
+<div class="cake">
+<div class="layer bottom"></div>
+<div class="layer middle"></div>
+<div class="layer top"></div>
+<div class="icing"></div>
+<div class="candle"><div class="flame" id="flame"></div></div>
+</div>
+
+<button onclick="enter()">Blow Candle 💨</button>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="main" class="center">
+<button class="nav-btn prev-btn" onclick="goIntro()">←</button>
+<button class="nav-btn next-btn-global" onclick="goPage3()">→</button>
+
+<div class="big-text">
+<div id="line1"></div>
+<div id="line2"></div>
+<div id="line3"></div>
+</div>
+
+<div class="heart">💗</div>
+<div class="subtext">Can't believe you're 20. Your teenage years are over dear... #uncleRofi</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="center">
+<button class="nav-btn prev-btn" onclick="goMain()">←</button>
+<button class="nav-btn next-btn-global" onclick="goPage4()">→</button>
+
+<div id="emotionalText" class="emotional"></div>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4">
+<button class="nav-btn prev-btn" onclick="goPage3()">←</button>
+<button class="nav-btn next-btn-global" onclick="goPage5()">→</button>
+<div class="bg-photo"></div>
+<div class="train" id="train"></div>
+</div>
+
+<!-- PAGE 5 -->
+<div id="page5" class="center">
+<button class="nav-btn prev-btn" onclick="goPage4()">←</button>
+<button class="nav-btn next-btn-global" onclick="goPage6()">→</button>
+
+<video id="vid" controls>
+<source src="video.mp4">
+</video>
+</div>
+
+<!-- PAGE 6 -->
+<div id="page6" class="center">
+<button class="nav-btn prev-btn" onclick="goPage5()">←</button>
+
+<div class="lock-box">
+<h2>Enter Code</h2>
+<h3>The Days I love the most. Hint: Our Birthdays.</h3>
+<input id="lockInput" class="lock-input">
+<button onclick="checkCode()">Unlock</button>
+</div>
+</div>
+
+<!-- PAGE 7 -->
+<div id="page7" class="center">
+<button class="nav-btn prev-btn" onclick="goPage6()">←</button>
+<button class="nav-btn next-btn-global" onclick="goMain()">→</button>
+
+<div class="letter">
+So... Finally,<br><br>
+My love ❤️<br>
+<br>
+Happiest Birthday to you. 
+I know you don't celebrate it, But I love Birthdays. I love my Birthday and I love Birthdays of people I love.
+I hope you know I love you more than I love my Birthday. And from this day onwards you'll love your birthdays too.
+That's a rule. Hope you enjoy today. I'll not say this'll be your best day or something but I hope this birthday is different.
+I love you to pluto and back. <br>
+With Love,<br>
+Me.
+</div>
+</div>
+
+<script>
+let started=false;
+
+function show(id){
+["intro","main","page3","page4","page5","page6","page7"]
+.forEach(p=>document.getElementById(p).style.display="none");
+
+if(id==="page4"){
+document.getElementById(id).style.display="block";
+}else{
+document.getElementById(id).style.display="flex";
+}
+}
+
+function enter(){
+if(started) return;
+started=true;
+
+document.getElementById("flame").style.display="none";
+document.getElementById("intro").classList.add("fade-out");
+
+setTimeout(()=>{
+show("main");
+animateText();
+},800);
+}
+
+function animateText(){
+const lines=["Happiest","birthday","Rouf"];
+
+lines.forEach((line,i)=>{
+const el=document.getElementById("line"+(i+1));
+el.innerHTML="";
+[...line].forEach((ch,j)=>{
+const span=document.createElement("span");
+span.textContent=ch;
+span.style.animationDelay=(i*0.6+j*0.07)+"s";
+el.appendChild(span);
+});
+});
+}
+
+function goIntro(){show("intro")}
+function goMain(){show("main")}
+function goPage3(){show("page3");typeText()}
+function goPage4(){show("page4");loadPhotos()}
+function goPage5(){
+show("page5");
+document.getElementById("vid").play().catch(()=>{});
+}
+function goPage6(){show("page6")}
+
+function typeText(){
+const text="I don't say this enough... but you mean so much to me.\n \n You make my days lighter, my thoughts softer, and my life better just by being in it.\n \n And I hope you never forget how special you are... not just today, but every single day.";
+let i=0;
+const el=document.getElementById("emotionalText");
+el.innerHTML="";
+
+(function t(){
+if(i<text.length){
+el.innerHTML+=text[i++];
+setTimeout(t,25);
+}
+})();
+}
+
+function loadPhotos(){
+const t=document.getElementById("train");
+if(t.children.length) return;
+
+for(let i=1;i<=20;i++){
+const img=document.createElement("img");
+img.src="img"+i+".jpg";
+t.appendChild(img);
+}
+}
+
+function checkCode(){
+if(document.getElementById("lockInput").value==="2022"){
+show("page7");
+}else{
+alert("Wrong code ❤️");
+}
+}
+</script>
+
+</body>
+</html>
